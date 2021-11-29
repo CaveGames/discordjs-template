@@ -85,7 +85,7 @@ module.exports = {
 
 ### Database
 
-#### Creating an database table
+#### Creating a database table
 For this create a file at `./src/database/definitions`
 ```js
 const DataTypes = require('sequelize');
