@@ -2,7 +2,10 @@ version: '3'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        MODE: ${NODE_ENV}
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
