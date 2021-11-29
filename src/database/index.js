@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 
-const connection = new Sequelize('discordBot', 'bot', 'password', {
+const connection = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
 	host: 'sql',
 	dialect: 'mysql',
-	logging: true,
+	logging: false,
 });
 
 const models = {};
