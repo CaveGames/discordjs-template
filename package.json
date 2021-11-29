@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon -L ./src/index.js",
+		"dev": "nodemon -L -r dotenv/config -w .env -w . ./src/index.js",
 		"start": "node ./src/index.js",
 		"build": ""
 	},
@@ -20,6 +20,7 @@
 		"sequelize": "^6.6.5"
 	},
 	"devDependencies": {
+		"dotenv": "^10.0.0",
 		"eslint": "^7.32.0",
 		"nodemon": "^2.0.12",
 		"prettier": "^2.4.1",

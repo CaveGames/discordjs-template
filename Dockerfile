@@ -2,11 +2,11 @@ FROM node:16
 
 WORKDIR /usr/app
 
-COPY --chmod=744 entrypoint wait-for /
+RUN apt-get update && apt-get install -y netcat
 
-COPY ./src ./src
-COPY package.json package-lock.json ./
+COPY --chown=node:node wait-for /
+COPY --chown=node:node . .
+RUN npm install
 
-RUN apt-get update && apt-get install -y netcat bash
-
-ENTRYPOINT [ "/entrypoint" ]
+USER node
+CMD /wait-for -t 180 sql:3306 -- npm run dev

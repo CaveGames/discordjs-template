@@ -1,1 +1,4 @@
-node_modules
+db-data
+.env.example
+docker-compose.yml
+Dockerfile

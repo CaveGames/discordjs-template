@@ -6,11 +6,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ./src:/usr/app/src:ro
-      - ./package.json:/usr/app/package.json
-      - ./package-lock.json:/usr/app/package-lock.json
-    env_file:
-      - .env
+      - ./:/usr/app/
+      - /usr/app/node_modules/
     depends_on:
       - sql
   sql:
@@ -20,9 +17,9 @@ services:
       - SYS_NICE
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
-      MYSQL_DATABASE: discordBot
-      MYSQL_USER: bot
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     expose:
       - 3306
     volumes:
