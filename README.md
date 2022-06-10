@@ -57,7 +57,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Swagger
-
-When you start the application in development mode Swagger gets available at http://localhost:3000/api
