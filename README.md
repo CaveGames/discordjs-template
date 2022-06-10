@@ -1,138 +1,63 @@
-<div align="center">
-  <br />
-  <p>
-    <a href="https://discord.js.org"><img src="https://discord.js.org/static/logo.svg" width="546" alt="discord.js" /></a>
-  </p>
-  <br />
-</div>
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="https://discord.js.org"><img src="https://discord.js.org/static/logo.svg" width="546" alt="discord.js Logo" /></a>
+</p>
 
-## About
-This is a useful little template to easily perform interactions with the [Discord API](https://discord.com/developers/docs/intro)
-using [Discord.js](https://discord.js.org/) with [Node.js](https://nodejs.org).
+<p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient <a href="https://discord.js.org/" target="_blank">discord.js</a> bots using <a href="https://nestjs.com" target="_blank">NestJS</a>.</p>
 
-- Object-oriented
-- Ready to use template
-- Database connection using [Sequelize](https://sequelize.org/master/)
-- Examples included
+## Description
 
-I would love seeing you on my [Discord](https://discord.gg/NHJ5hmnhbt).
+Ready for you. Dont worry about setting up:
+
+- Docker
+- Devcontainer
+- Swagger
+- And other default Settings for NestJS
+
+
+With <a href="https://docs.nestjs.com/modules" target="_blank">NestJS Modules</a> you can make a clean code structure.
+
+<a href="https://necord.org" target="_blank">Necord</a> gives you the ability to manage Slash-Commands, Context Menus, Events & Text-Commands using decorators.
 
 ## Installation
 
-**[Docker](https://docs.docker.com/get-docker/) 1.13.0 or newer is required.**<br>
-**[Docker-Compose](https://docs.docker.com/compose/install/) 1.10.0 or newer is required.**
-
-First you need to create your configuration file.
-```sh-session
-cp .env.example .env
-vim .env
-```
-Just make your adjustments to the configuration and drop the [bot token](https://discord.com/developers/).
-
-### For Development
-
-Just change the NODE_ENV variable in the .env file to "development" and start your Compose.
-```sh-session
-docker-compose up -d --build
+```bash
+$ npm install
 ```
 
-### For Production
+## Running the app (Docker)
 
-After changing the NODE_ENV variable to "production", you still need to link the .env file to the Docker compose.
-To do this, add the "env_file" section under the app service.
-```yml
-env_file:
-  - .env
-```
-After that you can start your bot just like for development.
-```sh-session
-docker-compose up -d --build
+```bash
+# development
+$ npm run docker:dev:up
+
+# production mode
+$ npm run docker:up
 ```
 
-## Example usage
+## Stopping the app (Docker)
 
-### Commands
+```bash
+# development
+$ npm run docker:dev:down
 
-Just create an new file in the commands diretory or an sub-folder (`./src/commands`).
-```js
-module.exports = {
-	command: 'test',
-	onlyAdmin: false,
-
-	async run(client, message, args) {
-		message.channel.send('Hello World!');
-	},
-};
-```
-- **command** defines the syntax how you can use your command (BOT_PREFIX + command)
-- **onlyAdmin** says if only users who have the role with id BOT_ADMIN_ROLE_ID can use them.
-
-### Events
-
-For using an event create a file at the events directory or an sub-folder (`./src/events`).
-```js
-module.exports = {
-	name: 'ready',
-
-	async run(client) {
-		console.log('Hello World');
-	},
-};
-```
-- **name** defines the type of event you are listening for. ([help](https://gist.github.com/koad/316b265a91d933fd1b62dddfcc3ff584))
-
-*Note that the passing parameters may differ from event to event. Only the client is always passed as the first object.* ([help](https://gist.github.com/koad/316b265a91d933fd1b62dddfcc3ff584))
-
-### Database
-
-#### Creating a database table
-For this create a file at `./src/database/definitions`
-```js
-const DataTypes = require('sequelize');
-
-module.exports = {
-	name: 'Test',
-	table: {
-		message: {
-			type: DataTypes.STRING,
-			allowNull: false,
-		},
-		test: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
-	},
-	associations: [
-		{
-			type: 'belongsTo',
-			table: 'Tim',
-			options: {
-				as: 'parent',
-				foreignKey: 'test',
-				onDelete: 'CASCADE',
-			},
-		},
-	],
-};
-```
-- **Name** contains the name of the table. The file name will be ignored.<br>
-- **[Table](https://sequelize.org/master/manual/model-basics.html)** contains the available columns.<br>
-- **[Associations](https://sequelize.org/master/class/lib/associations/base.js~Association.html)** consists of 3 parts.<br>
-  - **Type**: The type of the association. (belongsTo, hasMany, hasOne)
-  - **Table**: The name of the table you are refering to.
-  - **Options**: Supports the same values as in Sequelize itself.
-### Working with entries
-For accessing the entries you can use the same syntax as in Sequelize. ([help](https://sequelize.org/master/manual/model-querying-basics.html))<br>
-To use your tables you just have to import them on top of your file.
-```js
-const { Test } = require('../database').models;
+# production mode
+$ npm run docker:down
 ```
 
-## Links
+## Test
 
-- [Discord.js Documentation](https://discord.js.org/#/docs/)
-- [Discord.js Guide](https://discordjs.guide/)
-- [Sequelize Documentation](https://sequelize.org/master/)
+```bash
+# unit tests
+$ npm run test
 
-- [Discord](https://discord.gg/NHJ5hmnhbt)
-- [GitHub](https://github.com/CaveGames)
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Swagger
+
+When you start the application in development mode Swagger gets available at http://localhost:3000/api

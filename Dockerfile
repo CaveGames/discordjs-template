@@ -1,18 +1,25 @@
-FROM node:16
+FROM node:16 as development
 
-ARG MODE=development
-ENV NODE_ENV=${MODE}
+WORKDIR /usr/src/app
 
-WORKDIR /usr/app
+COPY package*.json ./
+RUN npm install --only=development
 
-RUN apt-get update && apt-get install -y netcat
+COPY . .
+RUN npm run build
 
-COPY --chown=node:node --chmod=744 wait-for /
-COPY --chown=node:node . .
-RUN if [ "${NODE_ENV}" = "production" ]; \
-	then npm install --production; \
-	else npm install; \
-	fi
 
-USER node
-CMD /wait-for -t 180 sql:3306 -- npm run env
+FROM node:16 as production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install --only=production
+
+COPY . .
+COPY --from=development /usr/src/app/dist ./dist
+
+CMD ["npm", "run", "start:prod"]

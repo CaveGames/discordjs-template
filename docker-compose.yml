@@ -1,31 +1,23 @@
-version: '3'
+version: '3.8'
 
 services:
-  app:
+  main:
     build:
       context: .
-      args:
-        MODE: ${NODE_ENV}
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-      - ./:/usr/app/
-      - /usr/app/node_modules/
+      target: production
+    env_file:
+      - .env
     depends_on:
-      - sql
-  sql:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    cap_add:
-      - SYS_NICE
+      - postgres
+  postgres:
+    image: postgres:12
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 'true'
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    expose:
-      - 3306
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE}
+      PG_DATA: /var/lib/postgresql/data
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-      - ./db-data:/var/lib/mysql
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
