@@ -1,3 +1,9 @@
+# DEPRECATED
+
+Use at your own risk.<br />
+I won't update this repo, because the used framework <a href="https://necord.org" target="_blank">Necord</a> couldn't fullfil my needs.<br />
+Maybe have a look at <a href="https://www.sapphirejs.dev" target="_blank">SapphireJS</a> instead. Many people on the official Discord.js Server love it.<br />
+<br />
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
   <a href="https://discord.js.org"><img src="https://discord.js.org/static/logo.svg" width="546" alt="discord.js Logo" /></a>
